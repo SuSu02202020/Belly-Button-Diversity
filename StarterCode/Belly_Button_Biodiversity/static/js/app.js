@@ -32,21 +32,16 @@
     // buildGauge(data.WFREQ);
      // @TODO: Build a Bubble Chart using the sample data
 
-     var x_values = sample.otu_ids;
-     var y_values = sample.sample_values;
-     var marker_size = sample.sample_values;
-     var marker_colors = sample.otu_ids; 
-     var text_values = sample.otu_labels;
  
      var trace1 = {
-       x: x_values,
-       y: y_values,
-       hovertext: text_values,
+       x: sample.otu_ids,
+       y: sample.sample_values,
+       hovertext: sample.otu_labels,
        mode: 'markers',
        marker: {
-         color: marker_colors,
+         color: sample.otu_ids,
          //opacity: [1, 0.8, 0.6, 0.4],
-       size: marker_size,
+       size: sample.sample_values,
        type: "bubble"
        }
      };
@@ -66,29 +61,25 @@
     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
 
-    var otu_ids = sample.otu_ids;
-    var sample_values = sample.sample_values;
-    var otu_labels = sample.otu_labels;
-
    // var sorted_sample_values = sample.sample_values.sort(d3.descending)
    // console.log(sorted_sample_values);
    // var dataTable = tabulate(sample, ["otu_ids","sample_values", "otu_labels"]);
-    var sorted_values = sample.sort(function(a, b){ 
-      return d3.descending(a[2], b[2]); 
-    });
+    //var sorted_values = sample.sort(function(a, b){ 
+    //  return d3.descending(a[2], b[2]); 
+   // });
     
 
-    var sliced_sample_values = sorted_values.slice(0, 10);
+    var sliced_sample_values = sample.sample_values.slice(0, 10);
     console.log(sliced_sample_values);
-    var sliced_otu_ids = otu_ids.slice(0, 10);
+    var sliced_otu_ids = sample.otu_ids.slice(0, 10);
     console.log(sliced_otu_ids);
-    var sliced_labels = otu_labels.slice(0, 10);
+    var sliced_labels = sample.otu_labels.slice(0, 10);
     console.log(sliced_labels);
 
     var data = [{
         values : sliced_sample_values,
-        labels : otu_ids,
-        hovertext: otu_labels,
+        labels : sliced_otu_ids,
+        hovertext: sliced_labels,
         type: "pie"
     }];
 
